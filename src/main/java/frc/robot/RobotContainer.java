@@ -59,7 +59,7 @@ public class RobotContainer {
   }
 
   private void configureBindings() {
-    
+
   }
 
   public Vector2 getDriveControl() {
@@ -78,7 +78,6 @@ public class RobotContainer {
   }
 
   public Command getAutonomousCommand() {
-    return Commands.print("No autonomous command configured");
-    // test
+    return autoCommandChooser.getSelected();
   }
 }
