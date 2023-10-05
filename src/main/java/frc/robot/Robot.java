@@ -27,6 +27,7 @@ public class Robot extends TimedRobot {
       Shuffleboard.getTab("Log").add(subsystem.log());
     }
 
+    // change the id later
     Compressor compressor = new Compressor(8, PneumaticsModuleType.CTREPCM);
     compressor.enableDigital();
   }
