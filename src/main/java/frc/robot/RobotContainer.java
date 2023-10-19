@@ -52,7 +52,7 @@ public class RobotContainer {
     m_driveSystem = new DriveSystem();
 
     //Command Instantiations
-    driveCommand = new DriveCommand(m_driveSystem, () -> getDriveControl())
+    driveCommand = new DriveCommand(m_driveSystem, () -> getDriveControl());
     m_driveSystem.setDefaultCommand(driveCommand);
 
     configureBindings();
@@ -76,6 +76,13 @@ public class RobotContainer {
     else{
       //turn -= throttle*0.4;
     }
+
+    Vector2 control = new Vector2(turn, throttle);
+    control = JoystickHelper.ScaledAxialDeadzone(control, Constants.Config.Input.kInputDeadband);
+    control = JoystickHelper.scaleStick(control, Constants.Config.Input.Stick.kInputScale);
+    control = JoystickHelper.clampStick(control);
+
+    return control;
   }
 
   public Command getAutonomousCommand() {
