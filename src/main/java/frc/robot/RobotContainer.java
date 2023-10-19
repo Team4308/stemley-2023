@@ -28,10 +28,10 @@ import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import frc.robot.commands.DriveCommand;
+import frc.robot.Commands.DriveCommand;
 
 public class RobotContainer {
-  public final List<LogSubsystem> subsystems. new ArrayList<LogSubsystem>();
+  public final List<LogSubsystem> subsystems = new ArrayList<LogSubsystem>();
 
   //Subsystems
   private final DriveSystem m_driveSystem;

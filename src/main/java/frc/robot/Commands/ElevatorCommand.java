@@ -1,4 +1,4 @@
-package frc.robot.commands;
+package frc.robot.Commands;
 
 import java.util.function.Supplier;
 
@@ -8,7 +8,7 @@ import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
-import frc.robot.subsystems.ElevatorSystem;
+import frc.robot.Subsystems.ElevatorSystem;
 import ca.team4308.absolutelib.math.DoubleUtils;
 
 public class ElevatorCommand extends CommandBase {
@@ -23,7 +23,7 @@ public class ElevatorCommand extends CommandBase {
         m_subsystem = subsystem;
         this.control = control;
         addRequirements(m_subsystem);
-        extension_controller.setSetpoint(subsystem.getSensorPosition());
+        //extension_controller.setSetpoint(subsystem.getSensorPosition());
     }
 
     // Called when the command is initially scheduled.
@@ -39,7 +39,7 @@ public class ElevatorCommand extends CommandBase {
 
         //needs to be updated later
 
-        extension_controller.setSetpoint(m_subsystem.getSensorPosition());
+        //extension_controller.setSetpoint(m_subsystem.getSensorPosition());
         m_subsystem.setMotorOutput(TalonFXControlMode.PercentOutput, control);
     }
 
