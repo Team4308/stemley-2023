@@ -164,7 +164,7 @@ public class DriveSystem extends TankDriveSubsystem {
         }
 
         public void resetAngle() {
-                gyro.reset();
+                //gyro.reset();
         }
 
         public void stopControllers() {
