@@ -12,7 +12,7 @@ public class ClawSystem extends LogSubsystem {
     public final DoubleSolenoid solenoid;
 
     public ClawSystem() {
-        //solenoid = new DoubleSolenoid();
+        solenoid = new DoubleSolenoid();
         solenoid.set(Value.kForward); // in
     }
 

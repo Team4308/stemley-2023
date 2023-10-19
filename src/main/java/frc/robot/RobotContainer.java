@@ -14,9 +14,9 @@ import ca.team4308.absolutelib.math.Vector2;
 import ca.team4308.absolutelib.math.DoubleUtils;
 import ca.team4308.absolutelib.wrapper.LogSubsystem;
 
+import frc.robot.Subsystems.DriveSystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
-
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.RepeatCommand;
@@ -31,7 +31,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Commands.DriveCommand;
 
 public class RobotContainer {
-  public final List<LogSubsystem> subsystems = new ArrayList<LogSubsystem>();
+  public final ArrayList<LogSubsystem> subsystems = new ArrayList<LogSubsystem>();
 
   //Subsystems
   private final DriveSystem m_driveSystem;
