@@ -1,4 +1,4 @@
-package frc.robot.subsystems;
+package frc.robot.Subsystems;
 
 import java.util.ArrayList;
 
@@ -12,7 +12,11 @@ import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import ca.team4308.absolutelib.wrapper.drive.TankDriveSubsystem;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.util.sendable.Sendable;
+import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.ADIS16470_IMU;
+import edu.wpi.first.wpilibj.ADIS16470_IMU.IMUAxis;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants;
@@ -20,9 +24,18 @@ import frc.robot.Constants;
 public class DriveSystem extends TankDriveSubsystem {
         // Master Controllers
         public final TalonFX masterLeft, masterRight;
-
         // Slave Controllers
         private final TalonFX slaveLeft, slaveRight;
+
+        //IMU
+        public static ADIS16470_IMU gyro = new ADIS16470_IMU();
+        // Beambreaks
+        public static DigitalInput lineBreak;
+        
+
+
+        public static Boolean brakeMode = false;
+
 
         // Controllers
         private ArrayList<TalonFX> controllersFX = new ArrayList<TalonFX>();
