@@ -80,6 +80,14 @@ public class ElevatorSystem extends MotoredSubsystem {
         motor.set(TalonFXControlMode.PercentOutput, 0.0);
     }
 
+    public boolean getMaxBreak(){
+        return maxBreak.get();
+    }
+
+    public boolean getMinBreak(){
+        return minBreak.get();
+    }
+
     @Override
     public Sendable log() {
         return this;
