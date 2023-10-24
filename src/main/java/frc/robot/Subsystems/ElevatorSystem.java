@@ -17,9 +17,8 @@ import frc.robot.Constants;
 public class ElevatorSystem extends MotoredSubsystem {
     public final TalonFX motor;
 
-    /* 
-    public static DigitalInput extendSensor;
-    public static DigitalInput retractSensor; */
+    public static DigitalInput maxBreak;
+    public static DigitalInput minBreak;
 
     private ArrayList<TalonFX> controllersFX = new ArrayList<TalonFX>();
 
@@ -28,6 +27,8 @@ public class ElevatorSystem extends MotoredSubsystem {
 
         //needs to be updated later
         //motor = new TalonFX(Constants.Mapping.Elevator.);
+        //maxBreak = new DigitalInput();
+        //minBreak = new DigitalInput();
 
         controllersFX.add(motor);
 
@@ -68,15 +69,15 @@ public class ElevatorSystem extends MotoredSubsystem {
      */
 
     public double getSensorPosition() {
-        return motor1.getSelectedSensorPosition(0);
+        return motor.getSelectedSensorPosition(0);
     }
 
     public void setMotorOutput(TalonFXControlMode mode, double val) {
-        motor1.set(mode, val);
+        motor.set(mode, val);
     }
 
     public void stopControllers() {
-        motor1.set(TalonFXControlMode.PercentOutput, 0.0);
+        motor.set(TalonFXControlMode.PercentOutput, 0.0);
     }
 
     @Override
