@@ -16,14 +16,15 @@ public class ElevatorCommand extends CommandBase {
     private final Supplier<Double> control;
 
     //needs to be updated later
-    //private final PIDController extension_controller = new PIDController();
+    private final PIDController extension_controller = new PIDController(Constants.Config.Elevator.ExtensionControl.kP,
+    Constants.Config.Elevator.ExtensionControl.kI, Constants.Config.Elevator.ExtensionControl.kD);
     
     // Init
     public ElevatorCommand(ElevatorSystem subsystem, Supplier<Double> control) {
         m_subsystem = subsystem;
         this.control = control;
         addRequirements(m_subsystem);
-        //extension_controller.setSetpoint(subsystem.getSensorPosition());
+        extension_controller.setSetpoint(subsystem.getSensorPosition());
     }
 
     // Called when the command is initially scheduled.
@@ -37,9 +38,20 @@ public class ElevatorCommand extends CommandBase {
     public void execute() {
         double control = this.control.get();
 
-        //needs to be updated later
+        if (!m_subsystem.getMinBreak()) { // If elevator is backed all the way in
+            m_subsystem.motor.setSelectedSensorPosition(0);
+            extension_controller.setSetpoint(m_subsystem.getSensorPosition());
+            if(control > 0){
+                return;
+            }
+        }
 
-        //extension_controller.setSetpoint(m_subsystem.getSensorPosition());
+        extension_controller.setSetpoint(m_subsystem.getSensorPosition());
+
+        // this needs to be checked later
+        if(!m_subsystem.getMaxBreak()) { // If elevator is extended all the way
+            m_subsystem.setMotorOutput(TalonFXControlMode.PercentOutput, 0);
+        }
         m_subsystem.setMotorOutput(TalonFXControlMode.PercentOutput, control);
     }
 

@@ -15,6 +15,10 @@ import ca.team4308.absolutelib.math.DoubleUtils;
 import ca.team4308.absolutelib.wrapper.LogSubsystem;
 
 import frc.robot.Subsystems.DriveSystem;
+import frc.robot.Subsystems.ClawSystem;
+import frc.robot.Subsystems.ClawSpinSystem;
+import frc.robot.Subsystems.ElevatorSystem;
+
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
@@ -31,19 +35,26 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 // andrew dai was here :3
 
 import frc.robot.Commands.DriveCommand;
+import frc.robot.Commands.ElevatorCommand;
+import frc.robot.Commands.ClawSpinCommand;
 
 public class RobotContainer {
   public final ArrayList<LogSubsystem> subsystems = new ArrayList<LogSubsystem>();
 
   //Subsystems
   private final DriveSystem m_driveSystem;
+  private final ClawSystem m_clawSystem;
+  private final ClawSpinSystem m_clawSpinSystem;
+  private final ElevatorSystem m_elevatorSystem;
 
   //Commands
   private final DriveCommand driveCommand;
+  private final ElevatorCommand elevatorCommand;
+  private final ClawSpinCommand clawSpinCommand;
 
   //Controllers
 
-  public final XBoxWrapper stick = new XBoxWrapper(0);
+  public final XBoxWrapper stick1 = new XBoxWrapper(0);
   public final XBoxWrapper stick2 = new XBoxWrapper(1);
 
   //Auto
@@ -52,26 +63,36 @@ public class RobotContainer {
   public RobotContainer() {
     //Subsystem Instantiations
     m_driveSystem = new DriveSystem();
+    subsystems.add(m_driveSystem);
+    m_clawSystem = new ClawSystem();
+    subsystems.add(m_clawSystem);
+    m_clawSpinSystem = new ClawSpinSystem();
+    subsystems.add(m_clawSpinSystem);
+    m_elevatorSystem = new ElevatorSystem();
+    subsystems.add(m_elevatorSystem);
 
     //Command Instantiations
     driveCommand = new DriveCommand(m_driveSystem, () -> getDriveControl());
     m_driveSystem.setDefaultCommand(driveCommand);
 
+    elevatorCommand = new ElevatorCommand(m_elevatorSystem, () -> getElevatorControl());
+    m_elevatorSystem.setDefaultCommand(elevatorCommand);
+  
     configureBindings();
   }
 
   private void configureBindings() {
-
+    stick2.LB.onTrue(new InstantCommand(() -> m_clawSystem.toggle(), m_clawSystem));
   }
 
   public Vector2 getDriveControl() {
-    double throttle = DoubleUtils.normalize(stick.getLeftY());
-    if(stick.RB.getAsBoolean()){
+    double throttle = DoubleUtils.normalize(stick1.getLeftY());
+    if(stick1.RB.getAsBoolean()){
       //throttle /= 2;
     }
 
-    double turn = DoubleUtils.normalize(stick.getRightX());
-    if(stick.getLeftY()!=0.0){
+    double turn = DoubleUtils.normalize(stick1.getRightX());
+    if(stick1.getLeftY()!=0.0){
         //increase turn in here
         //turn *= 1.4;
     }
@@ -85,6 +106,14 @@ public class RobotContainer {
     control = JoystickHelper.clampStick(control);
 
     return control;
+  }
+
+  public Double getElevatorControl() {
+    double y = DoubleUtils.normalize(stick2.getLeftY());
+    Vector2 control = new Vector2(0.0, y);
+    control = JoystickHelper.ScaledAxialDeadzone(control, Constants.Config.Input.kInputDeadband);
+    control = JoystickHelper.clampStick(control);
+    return control.y;
   }
 
   public Command getAutonomousCommand() {
