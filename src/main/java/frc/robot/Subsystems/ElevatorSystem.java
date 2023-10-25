@@ -26,6 +26,7 @@ public class ElevatorSystem extends MotoredSubsystem {
         // Setup and Add Controllers
 
         //needs to be updated later
+        
         //motor = new TalonFX(Constants.Mapping.Elevator.);
         //maxBreak = new DigitalInput();
         //minBreak = new DigitalInput();
@@ -92,6 +93,8 @@ public class ElevatorSystem extends MotoredSubsystem {
     public Sendable log() {
         Shuffleboard.getTab("Log").addBoolean("Elevator Retracted", () -> getMinBreak());
         Shuffleboard.getTab("Log").addBoolean("Elevator Extended", () -> getMaxBreak());
+        Shuffleboard.getTab("Log").addNumber("Elevator Extension Pos", () -> getSensorPosition());
+        Shuffleboard.getTab("Log").addNumber("Elevator Extension Current", () -> motor.getStatorCurrent());
         return this;
     }
 }
