@@ -4,13 +4,10 @@ import java.util.ArrayList;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.TalonSRXControlMode;
-import com.ctre.phoenix.motorcontrol.TalonSRXFeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import ca.team4308.absolutelib.wrapper.MotoredSubsystem;
 import edu.wpi.first.util.sendable.Sendable;
-import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import frc.robot.Constants;
 
 public class ClawSpinSystem extends MotoredSubsystem {

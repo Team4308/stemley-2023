@@ -17,6 +17,7 @@ public final class Constants {
 
         public static class Claw {
             public static int clawMotor = 5;
+            public static int PCM = 8;
         }*/
     }
 
