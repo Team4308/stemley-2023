@@ -44,22 +44,14 @@ public class DriveSystem extends MotoredSubsystem{
                 // Change Config For All Controllers
                 for (TalonSRX talon : controllersSRX) {
                         talon.configFactoryDefault(Constants.Generic.timeoutMs);
-                        talon.configOpenloopRamp(Constants.Config.Drive.Power.kOpenLoopRamp,
-                                        Constants.Generic.timeoutMs);
-                        talon.configClosedloopRamp(Constants.Config.Drive.Power.kClosedLoopRamp,
-                                        Constants.Generic.timeoutMs);
-                        talon.setNeutralMode(NeutralMode.Coast);
+                        talon.configOpenloopRamp(Constants.Config.Drive.Power.kOpenLoopRamp, Constants.Generic.timeoutMs);
+                        talon.configClosedloopRamp(Constants.Config.Drive.Power.kClosedLoopRamp, Constants.Generic.timeoutMs);
+                        talon.setNeutralMode(NeutralMode.Brake);
                         talon.configNeutralDeadband(0.001, Constants.Generic.timeoutMs);
                         talon.changeMotionControlFramePeriod(5);
                         talon.configVoltageCompSaturation(12.5, Constants.Generic.timeoutMs);
                         talon.enableVoltageCompensation(true);
                 }
-
-                // Set Sensor Phase for all loops
-                masterLeft.setSensorPhase(false);
-                // masterRight.setSensorPhase(false);
-
-
                 // Reset
                 stopControllers();
         }
@@ -67,32 +59,10 @@ public class DriveSystem extends MotoredSubsystem{
         /**
          * Getters And Setters
          */
-        public double getLeftSensorPosition() {
-                return masterLeft.getSelectedSensorPosition(0);
-                               // * Constants.Config.Drive.Kinematics.kEncoderInchesPerCount;
-        }
-
-        public double getRightSensorPosition() {
-                return 0;
-        }
-
-        public double getLeftSensorVelocity() {
-                return masterLeft.getSelectedSensorVelocity(0);
-        }
-
-        public double getRightSensorVelocity() {
-                return 0;
-        }
-
         
         public void setMotorOutput() {
                 masterLeft.set(TalonSRXControlMode.PercentOutput, 0.5);
         }
-
-        public void selectProfileSlot(int slot) {
-                masterLeft.selectProfileSlot(slot, 0);
-        }
-
 
         public void stopControllers() {
                 masterLeft.set(TalonSRXControlMode.PercentOutput, 0.0);
