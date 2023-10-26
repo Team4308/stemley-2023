@@ -81,8 +81,8 @@ public class RobotContainer {
   }
 
   private void configureBindings() {
-    stick2.LB.whileTrue(new ClawSpinCommand(m_clawSpinSystem), -0.5);
-    stick2.RB.whileTrue(new ClawSpinCommand(m_clawSpinSystem), 0.5);
+    stick2.LB.whileTrue(new ClawSpinCommand(m_clawSpinSystem, -0.5));
+    stick2.RB.whileTrue(new ClawSpinCommand(m_clawSpinSystem, 0.5));
   }
 
   public Vector2 getDriveControl() {
