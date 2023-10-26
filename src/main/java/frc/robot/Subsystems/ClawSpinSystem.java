@@ -18,8 +18,8 @@ public class ClawSpinSystem extends MotoredSubsystem {
         // Setup and Add Controllers
 
         //change later
-        //motor = new TalonSRX(Constants.Mapping.Arm.motor1);
-        //controllersSRX.add(motor);
+        //motor = new TalonSRX(Constants.Mapping.ClawSpin.m);
+        controllersSRX.add(motor);
 
         // Reset Config for all
         for (TalonSRX talon : controllersSRX) {
@@ -38,24 +38,8 @@ public class ClawSpinSystem extends MotoredSubsystem {
             talon.enableVoltageCompensation(true);
         }
 
-        //motor.configSelectedFeedbackSensor(TalonSRXFeedbackDevice.QuadEncoder, 0, Constants.Generic.timeoutMs);
-
-        // Reset
-        resetSensors();
         stopControllers();
     }
-
-    public void resetSensors() {
-        //motor.setSelectedSensorPosition(0);
-    }
-
-    /**
-     * Getters And Setters
-     */
-
-    /**
-     * Misc Stuff
-     */
 
     public void setClawSpinOutput(TalonSRXControlMode mode, double val) {
         //motor.set(mode, val);
