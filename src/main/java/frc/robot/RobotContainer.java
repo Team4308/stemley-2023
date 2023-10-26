@@ -39,7 +39,6 @@ public class RobotContainer {
   private final DriveSystem m_driveSystem;
 
   //Commands
-  private final DriveCommand driveCommand;
 
   //Controllers
 
@@ -54,14 +53,12 @@ public class RobotContainer {
     m_driveSystem = new DriveSystem();
 
     //Command Instantiations
-    driveCommand = new DriveCommand(m_driveSystem, () -> getDriveControl());
-    m_driveSystem.setDefaultCommand(driveCommand);
 
     configureBindings();
   }
 
   private void configureBindings() {
-
+    stick.LB.whileTrue(new DriveCommand(m_driveSystem));
   }
 
   public Vector2 getDriveControl() {

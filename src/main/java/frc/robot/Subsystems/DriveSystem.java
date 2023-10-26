@@ -60,8 +60,8 @@ public class DriveSystem extends MotoredSubsystem{
          * Getters And Setters
          */
         
-        public void setMotorOutput() {
-                masterLeft.set(TalonSRXControlMode.PercentOutput, 0.5);
+        public void setMotorOutput(TalonSRXControlMode mode, double val) {
+                masterLeft.set(mode, val);
         }
 
         public void stopControllers() {
