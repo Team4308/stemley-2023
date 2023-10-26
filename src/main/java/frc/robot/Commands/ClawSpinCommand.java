@@ -17,25 +17,28 @@ public class ClawSpinCommand extends CommandBase {
     public ClawSpinCommand(ClawSpinSystem subsystem, Supplier<Double> control) {
         m_subsystem = subsystem;
         this.control = control;
-
         addRequirements(m_subsystem);
     }
 
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
-        
+        m_subsystem.stopControllers();
     }
 
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
         double control = this.control.get();
-
+    
         m_subsystem.setClawSpinOutput(TalonSRXControlMode.PercentOutput, control);
     }
+
     @Override
-    public boolean isFinished() {return false;}
+    public boolean isFinished() {
+        return false;
+    }
+
     @Override
     public void end(boolean interrupted) {
         m_subsystem.stopControllers();
