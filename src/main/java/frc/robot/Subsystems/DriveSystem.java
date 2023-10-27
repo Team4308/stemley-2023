@@ -8,6 +8,7 @@ import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
 import com.ctre.phoenix.motorcontrol.TalonFXFeedbackDevice;
 import com.ctre.phoenix.motorcontrol.TalonFXInvertType;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
+import com.kauailabs.navx.frc.AHRS;
 
 import ca.team4308.absolutelib.wrapper.drive.TankDriveSubsystem;
 import edu.wpi.first.math.geometry.Pose2d;
@@ -26,6 +27,9 @@ public class DriveSystem extends TankDriveSubsystem {
 
         // Controllers
         private ArrayList<TalonFX> controllersFX = new ArrayList<TalonFX>();
+
+        // Gyro
+        public static AHRS gyro = new AHRS();
 
         // Init
         public DriveSystem() {
@@ -164,7 +168,7 @@ public class DriveSystem extends TankDriveSubsystem {
         }
 
         public void resetAngle() {
-                //gyro.reset();
+                gyro.reset();
         }
 
         public void stopControllers() {
@@ -180,6 +184,7 @@ public class DriveSystem extends TankDriveSubsystem {
 
         @Override
         public Sendable log() {
+                Shuffleboard.getTab("Log").addDouble("Angle", () -> gyro.getYaw());
                 return this;
         }
 }

@@ -90,6 +90,20 @@ public final class Constants {
                     public static double kF = 0.0468;
                 }
             }
+
+            public static class HoldInPlace {
+                public static double kP = 0.00015;
+                public static double kI = 0.0;
+                public static double kD = 0.0;
+                public static double kTolerance = 100.0;
+            }
+
+            public static class PitchControl {
+                public static double kP = 0.0065;
+                public static double kI = 0.000;
+                public static double kD = 0.000;
+                public static double kTolerance = 2.0;
+            }
         }
 
         public static class Elevator {
