@@ -38,6 +38,9 @@ import frc.robot.Commands.DriveCommand;
 import frc.robot.Commands.ElevatorCommand;
 import frc.robot.Commands.ClawSpinCommand;
 
+import frc.robot.Commands.Auto.DriveDistance;
+import frc.robot.Commands.Auto.Groups.Basic;
+
 public class RobotContainer {
   public final ArrayList<LogSubsystem> subsystems = new ArrayList<LogSubsystem>();
 
@@ -59,6 +62,8 @@ public class RobotContainer {
   //Auto
   private final SendableChooser<Command> autoCommandChooser = new SendableChooser<Command>();
 
+  private final Basic basic;
+
   public RobotContainer() {
     //Subsystem Instantiations
     m_driveSystem = new DriveSystem();
@@ -77,12 +82,16 @@ public class RobotContainer {
     elevatorCommand = new ElevatorCommand(m_elevatorSystem, () -> getElevatorControl());
     m_elevatorSystem.setDefaultCommand(elevatorCommand);
   
+    basic = new Basic(m_driveSystem);
+
+    autoCommandChooser.addOption("basic", basic);
+
     configureBindings();
   }
 
   private void configureBindings() {
-    stick2.LB.whileTrue(new ClawSpinCommand(m_clawSpinSystem, -0.5));
-    stick2.RB.whileTrue(new ClawSpinCommand(m_clawSpinSystem, 0.5));
+    stick2.LB.whileTrue(new ClawSpinCommand(m_clawSpinSystem, 1));
+    stick2.RB.whileTrue(new ClawSpinCommand(m_clawSpinSystem, -1));
   }
 
   public Vector2 getDriveControl() {
@@ -118,6 +127,5 @@ public class RobotContainer {
 
   public Command getAutonomousCommand() {
     return autoCommandChooser.getSelected();
-    // test
   }
 }
