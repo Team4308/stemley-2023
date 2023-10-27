@@ -39,10 +39,12 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Commands.DriveCommand;
 import frc.robot.Commands.ElevatorCommand;
 import frc.robot.Commands.ClawSpinCommand;
+import frc.robot.Commands.DockingCommand;
 import frc.robot.Commands.LEDCommand;
 
 import frc.robot.Commands.Auto.DriveDistance;
 import frc.robot.Commands.Auto.Groups.Basic;
+import frc.robot.Commands.Auto.Groups.DockOnly;
 
 public class RobotContainer {
   public final ArrayList<LogSubsystem> subsystems = new ArrayList<LogSubsystem>();
@@ -69,6 +71,7 @@ public class RobotContainer {
   private final SendableChooser<Command> autoCommandChooser = new SendableChooser<Command>();
 
   private final Basic basic;
+  private final DockOnly dockOnly;
 
   public RobotContainer() {
     //Subsystem Instantiations
@@ -96,8 +99,10 @@ public class RobotContainer {
     m_ledSystem.setDefaultCommand(ledCommand);
   
     basic = new Basic(m_driveSystem);
+    dockOnly = new DockOnly(m_driveSystem);
 
     autoCommandChooser.addOption("basic", basic);
+    autoCommandChooser.addOption("DockOnly", dockOnly);
 
     configureBindings();
   }
@@ -105,6 +110,7 @@ public class RobotContainer {
   private void configureBindings() {
     stick2.LB.whileTrue(new ClawSpinCommand(m_clawSpinSystem, 1));
     stick2.RB.whileTrue(new ClawSpinCommand(m_clawSpinSystem, -1));
+    stick1.B.onTrue(new InstantCommand(() -> m_driveSystem.resetAngle(), m_driveSystem));
     stick1.A.onTrue(new InstantCommand(() -> m_limelightSystem.toggleCamera(), m_limelightSystem));
   }
 
