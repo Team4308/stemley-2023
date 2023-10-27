@@ -58,8 +58,8 @@ public class RobotContainer {
   }
 
   private void configureBindings() {
-    stick.LB.whileTrue(new DriveCommand(m_driveSystem, 0.5));
-    stick.RB.whileTrue(new DriveCommand(m_driveSystem, -0.5));
+    stick.LB.whileTrue(new DriveCommand(m_driveSystem, 1));
+    stick.RB.whileTrue(new DriveCommand(m_driveSystem, -1));
   }
 
   public Vector2 getDriveControl() {
