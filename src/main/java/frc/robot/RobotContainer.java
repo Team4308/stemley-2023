@@ -18,6 +18,8 @@ import frc.robot.Subsystems.DriveSystem;
 import frc.robot.Subsystems.ClawSystem;
 import frc.robot.Subsystems.ClawSpinSystem;
 import frc.robot.Subsystems.ElevatorSystem;
+import frc.robot.Subsystems.LimelightSystem;
+import frc.robot.Subsystems.LEDSystem;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
@@ -37,6 +39,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Commands.DriveCommand;
 import frc.robot.Commands.ElevatorCommand;
 import frc.robot.Commands.ClawSpinCommand;
+import frc.robot.Commands.LEDCommand;
 
 import frc.robot.Commands.Auto.DriveDistance;
 import frc.robot.Commands.Auto.Groups.Basic;
@@ -49,10 +52,13 @@ public class RobotContainer {
   private final ClawSystem m_clawSystem;
   private final ClawSpinSystem m_clawSpinSystem;
   private final ElevatorSystem m_elevatorSystem;
+  private final LimelightSystem m_limelightSystem;
+  private final LEDSystem m_ledSystem;
 
   //Commands
   private final DriveCommand driveCommand;
   private final ElevatorCommand elevatorCommand;
+  private final LEDCommand ledCommand;
 
   //Controllers
 
@@ -74,6 +80,10 @@ public class RobotContainer {
     subsystems.add(m_clawSpinSystem);
     m_elevatorSystem = new ElevatorSystem();
     subsystems.add(m_elevatorSystem);
+    m_limelightSystem = new LimelightSystem();
+    subsystems.add(m_limelightSystem);
+    m_ledSystem = new LEDSystem();
+    subsystems.add(m_ledSystem);
 
     //Command Instantiations
     driveCommand = new DriveCommand(m_driveSystem, () -> getDriveControl());
@@ -81,6 +91,9 @@ public class RobotContainer {
 
     elevatorCommand = new ElevatorCommand(m_elevatorSystem, () -> getElevatorControl());
     m_elevatorSystem.setDefaultCommand(elevatorCommand);
+
+    ledCommand = new LEDCommand(m_ledSystem, () -> getLEDCommand());
+    m_ledSystem.setDefaultCommand(ledCommand);
   
     basic = new Basic(m_driveSystem);
 
@@ -92,6 +105,7 @@ public class RobotContainer {
   private void configureBindings() {
     stick2.LB.whileTrue(new ClawSpinCommand(m_clawSpinSystem, 1));
     stick2.RB.whileTrue(new ClawSpinCommand(m_clawSpinSystem, -1));
+    stick1.A.onTrue(new InstantCommand(() -> m_limelightSystem.toggleCamera(), m_limelightSystem));
   }
 
   public Vector2 getDriveControl() {
@@ -127,5 +141,9 @@ public class RobotContainer {
 
   public Command getAutonomousCommand() {
     return autoCommandChooser.getSelected();
+  }
+
+  public Integer getLEDCommand() {
+    return 1;
   }
 }
