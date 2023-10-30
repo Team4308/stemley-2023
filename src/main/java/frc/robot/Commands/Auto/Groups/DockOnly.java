@@ -11,7 +11,7 @@ import frc.robot.Commands.DockingCommand;
 import frc.robot.Commands.Auto.DriveDistance;
 
 import frc.robot.Subsystems.DriveSystem;
-import frc.robot.Subsystems.ClawSystem;
+//import frc.robot.Subsystems.ClawSystem;
 
 
 public class DockOnly extends SequentialCommandGroup {

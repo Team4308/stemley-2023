@@ -15,8 +15,8 @@ import ca.team4308.absolutelib.math.DoubleUtils;
 import ca.team4308.absolutelib.wrapper.LogSubsystem;
 
 import frc.robot.Subsystems.DriveSystem;
-import frc.robot.Subsystems.ClawSystem;
-import frc.robot.Subsystems.ClawSpinSystem;
+//import frc.robot.Subsystems.ClawSystem;
+//import frc.robot.Subsystems.ClawSpinSystem;
 import frc.robot.Subsystems.ElevatorSystem;
 import frc.robot.Subsystems.LimelightSystem;
 import frc.robot.Subsystems.LEDSystem;
@@ -38,7 +38,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.robot.Commands.DriveCommand;
 import frc.robot.Commands.ElevatorCommand;
-import frc.robot.Commands.ClawSpinCommand;
+//import frc.robot.Commands.ClawSpinCommand;
 import frc.robot.Commands.DockingCommand;
 import frc.robot.Commands.LEDCommand;
 
@@ -51,8 +51,8 @@ public class RobotContainer {
 
   //Subsystems
   private final DriveSystem m_driveSystem;
-  private final ClawSystem m_clawSystem;
-  private final ClawSpinSystem m_clawSpinSystem;
+  //private final ClawSystem m_clawSystem;
+  //private final ClawSpinSystem m_clawSpinSystem;
   private final ElevatorSystem m_elevatorSystem;
   private final LimelightSystem m_limelightSystem;
   private final LEDSystem m_ledSystem;
@@ -77,10 +77,10 @@ public class RobotContainer {
     //Subsystem Instantiations
     m_driveSystem = new DriveSystem();
     subsystems.add(m_driveSystem);
-    m_clawSystem = new ClawSystem();
-    subsystems.add(m_clawSystem);
-    m_clawSpinSystem = new ClawSpinSystem();
-    subsystems.add(m_clawSpinSystem);
+    //m_clawSystem = new ClawSystem();
+    //subsystems.add(m_clawSystem);
+    //m_clawSpinSystem = new ClawSpinSystem();
+    //subsystems.add(m_clawSpinSystem);
     m_elevatorSystem = new ElevatorSystem();
     subsystems.add(m_elevatorSystem);
     m_limelightSystem = new LimelightSystem();
@@ -108,8 +108,8 @@ public class RobotContainer {
   }
 
   private void configureBindings() {
-    stick2.LB.whileTrue(new ClawSpinCommand(m_clawSpinSystem, 1));
-    stick2.RB.whileTrue(new ClawSpinCommand(m_clawSpinSystem, -1));
+    //stick2.LB.whileTrue(new ClawSpinCommand(m_clawSpinSystem, 1));
+    //stick2.RB.whileTrue(new ClawSpinCommand(m_clawSpinSystem, -1));
     stick1.B.onTrue(new InstantCommand(() -> m_driveSystem.resetAngle(), m_driveSystem));
     stick1.A.onTrue(new InstantCommand(() -> m_limelightSystem.toggleCamera(), m_limelightSystem));
   }

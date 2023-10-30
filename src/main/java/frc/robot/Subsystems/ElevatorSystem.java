@@ -26,7 +26,7 @@ public class ElevatorSystem extends MotoredSubsystem {
         // Setup and Add Controllers
 
         //needs to be updated later
-        //motor = new TalonFX(Constants.Mapping.Elevator.);
+        motor = new TalonFX(Constants.Mapping.Elevator.elevatorMotor);
         //maxBreak = new DigitalInput();
         //minBreak = new DigitalInput();
 

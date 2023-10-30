@@ -11,11 +11,11 @@ public final class Constants {
             public static int backRight = 3;
         }
 
-        /*public static class Elevator {
+        public static class Elevator {
             public static int elevatorMotor = 4;
         }
 
-        public static class Claw {
+        /*public static class Claw {
             public static int clawMotor = 5;
             public static int PCM = 8;
         }*/
