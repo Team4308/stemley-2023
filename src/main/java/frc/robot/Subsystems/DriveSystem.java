@@ -20,6 +20,7 @@ import edu.wpi.first.wpilibj.ADIS16470_IMU.IMUAxis;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants;
+import com.kauailabs.navx.frc.AHRS;
 
 public class DriveSystem extends MotoredSubsystem{
         // Master Controllers
@@ -29,6 +30,9 @@ public class DriveSystem extends MotoredSubsystem{
 
         // Controllers
         private ArrayList<TalonSRX> controllersSRX = new ArrayList<TalonSRX>();
+
+        // Gyro
+        public static AHRS gyro = new AHRS();
 
         // Init
         public DriveSystem() {
@@ -68,8 +72,14 @@ public class DriveSystem extends MotoredSubsystem{
                 masterLeft.set(TalonSRXControlMode.PercentOutput, 0.0);
         }
 
+        public void resetAngle() {
+                gyro.reset();
+        }
+
         @Override
         public Sendable log() {
+                Shuffleboard.getTab("Log").addDouble("Angle", () -> gyro.getYaw());
+                Shuffleboard.getTab("Log").addNumber("testing", () -> 1);
                 return this;
         }
 }
