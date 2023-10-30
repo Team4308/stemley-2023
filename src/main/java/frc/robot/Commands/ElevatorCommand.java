@@ -38,22 +38,7 @@ public class ElevatorCommand extends CommandBase {
     public void execute() {
         double control = this.control.get();
 
-        if (!m_subsystem.getMinBreak()) { // If elevator is backed all the way in
-            m_subsystem.motor.setSelectedSensorPosition(0);
-            extension_controller.setSetpoint(m_subsystem.getSensorPosition());
-            if(control > 0){
-                return;
-            }
-        }
-
-        // this needs to be checked later
-        if (!m_subsystem.getMaxBreak()) { // If elevator is backed all the way in
-            //m_subsystem.motor.setSelectedSensorPosition();
-            extension_controller.setSetpoint(m_subsystem.getSensorPosition());
-            if(control > 0){
-                return;
-            }
-        }
+        
 
         extension_controller.setSetpoint(m_subsystem.getSensorPosition());
         m_subsystem.setMotorOutput(TalonFXControlMode.PercentOutput, control);

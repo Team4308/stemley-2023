@@ -17,9 +17,6 @@ import frc.robot.Constants;
 public class ElevatorSystem extends MotoredSubsystem {
     public final TalonFX motor;
 
-    public static DigitalInput maxBreak;
-    public static DigitalInput minBreak;
-
     private ArrayList<TalonFX> controllersFX = new ArrayList<TalonFX>();
 
     public ElevatorSystem() {
@@ -27,8 +24,6 @@ public class ElevatorSystem extends MotoredSubsystem {
 
         //needs to be updated later
         motor = new TalonFX(Constants.Mapping.Elevator.elevatorMotor);
-        //maxBreak = new DigitalInput();
-        //minBreak = new DigitalInput();
 
         controllersFX.add(motor);
 
@@ -80,18 +75,9 @@ public class ElevatorSystem extends MotoredSubsystem {
         motor.set(TalonFXControlMode.PercentOutput, 0.0);
     }
 
-    public boolean getMaxBreak(){
-        return maxBreak.get();
-    }
-
-    public boolean getMinBreak(){
-        return minBreak.get();
-    }
 
     @Override
     public Sendable log() {
-        Shuffleboard.getTab("Log").addBoolean("Elevator Retracted", () -> getMinBreak());
-        Shuffleboard.getTab("Log").addBoolean("Elevator Extended", () -> getMaxBreak());
         return this;
     }
 }

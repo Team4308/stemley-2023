@@ -5,14 +5,14 @@ import com.ctre.phoenix.motorcontrol.StatorCurrentLimitConfiguration;
 public final class Constants {
     public static class Mapping {
         public static class Drive {
-            public static int frontLeft = 0;
-            public static int backLeft = 2;
-            public static int frontRight = 1;
-            public static int backRight = 3;
+            //public static int frontLeft = 1;
+            //public static int backLeft = 2;
+            //public static int frontRight = 0;
+            //public static int backRight = 4;
         }
 
         public static class Elevator {
-            public static int elevatorMotor = 4;
+            public static int elevatorMotor = 5;
         }
 
         /*public static class Claw {
@@ -27,7 +27,7 @@ public final class Constants {
 
     public static class Config {
         public static class Input {
-            public static double kInputDeadband = 0.14;
+            public static double kInputDeadband = 0.01;
 
             public static class Stick {
                 public static double kInputScale = 2.0;
@@ -108,7 +108,7 @@ public final class Constants {
 
         public static class Elevator {
             public static class ExtensionControl {
-                public static double kP = 0.01;
+                public static double kP = 0.00001;
                 public static double kI = 0.0;
                 public static double kD = 0.0;
             }

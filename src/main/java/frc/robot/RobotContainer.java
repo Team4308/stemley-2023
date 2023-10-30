@@ -14,7 +14,7 @@ import ca.team4308.absolutelib.math.Vector2;
 import ca.team4308.absolutelib.math.DoubleUtils;
 import ca.team4308.absolutelib.wrapper.LogSubsystem;
 
-import frc.robot.Subsystems.DriveSystem;
+//import frc.robot.Subsystems.DriveSystem;
 //import frc.robot.Subsystems.ClawSystem;
 //import frc.robot.Subsystems.ClawSpinSystem;
 import frc.robot.Subsystems.ElevatorSystem;
@@ -36,21 +36,18 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 // andrew dai was here :3
 
-import frc.robot.Commands.DriveCommand;
+//import frc.robot.Commands.DriveCommand;
 import frc.robot.Commands.ElevatorCommand;
 //import frc.robot.Commands.ClawSpinCommand;
-import frc.robot.Commands.DockingCommand;
+//import frc.robot.Commands.DockingCommand;
 import frc.robot.Commands.LEDCommand;
 
-import frc.robot.Commands.Auto.DriveDistance;
-import frc.robot.Commands.Auto.Groups.Basic;
-import frc.robot.Commands.Auto.Groups.DockOnly;
 
 public class RobotContainer {
   public final ArrayList<LogSubsystem> subsystems = new ArrayList<LogSubsystem>();
 
   //Subsystems
-  private final DriveSystem m_driveSystem;
+  //private final DriveSystem m_driveSystem;
   //private final ClawSystem m_clawSystem;
   //private final ClawSpinSystem m_clawSpinSystem;
   private final ElevatorSystem m_elevatorSystem;
@@ -58,7 +55,7 @@ public class RobotContainer {
   private final LEDSystem m_ledSystem;
 
   //Commands
-  private final DriveCommand driveCommand;
+  //private final DriveCommand driveCommand;
   private final ElevatorCommand elevatorCommand;
   private final LEDCommand ledCommand;
 
@@ -70,13 +67,8 @@ public class RobotContainer {
   //Auto
   private final SendableChooser<Command> autoCommandChooser = new SendableChooser<Command>();
 
-  private final Basic basic;
-  private final DockOnly dockOnly;
-
   public RobotContainer() {
-    //Subsystem Instantiations
-    m_driveSystem = new DriveSystem();
-    subsystems.add(m_driveSystem);
+ 
     //m_clawSystem = new ClawSystem();
     //subsystems.add(m_clawSystem);
     //m_clawSpinSystem = new ClawSpinSystem();
@@ -89,8 +81,6 @@ public class RobotContainer {
     subsystems.add(m_ledSystem);
 
     //Command Instantiations
-    driveCommand = new DriveCommand(m_driveSystem, () -> getDriveControl());
-    m_driveSystem.setDefaultCommand(driveCommand);
 
     elevatorCommand = new ElevatorCommand(m_elevatorSystem, () -> getElevatorControl());
     m_elevatorSystem.setDefaultCommand(elevatorCommand);
@@ -98,11 +88,6 @@ public class RobotContainer {
     ledCommand = new LEDCommand(m_ledSystem, () -> getLEDCommand());
     m_ledSystem.setDefaultCommand(ledCommand);
   
-    basic = new Basic(m_driveSystem);
-    dockOnly = new DockOnly(m_driveSystem);
-
-    autoCommandChooser.addOption("basic", basic);
-    autoCommandChooser.addOption("DockOnly", dockOnly);
 
     configureBindings();
   }
@@ -110,7 +95,6 @@ public class RobotContainer {
   private void configureBindings() {
     //stick2.LB.whileTrue(new ClawSpinCommand(m_clawSpinSystem, 1));
     //stick2.RB.whileTrue(new ClawSpinCommand(m_clawSpinSystem, -1));
-    stick1.B.onTrue(new InstantCommand(() -> m_driveSystem.resetAngle(), m_driveSystem));
     stick1.A.onTrue(new InstantCommand(() -> m_limelightSystem.toggleCamera(), m_limelightSystem));
   }
 
