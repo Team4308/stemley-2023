@@ -15,7 +15,6 @@ import ca.team4308.absolutelib.math.DoubleUtils;
 import ca.team4308.absolutelib.wrapper.LogSubsystem;
 
 import frc.robot.Subsystems.DriveSystem;
-import frc.robot.Subsystems.ClawSystem;
 import frc.robot.Subsystems.ClawSpinSystem;
 import frc.robot.Subsystems.ElevatorSystem;
 import frc.robot.Subsystems.LimelightSystem;
@@ -51,7 +50,6 @@ public class RobotContainer {
 
   //Subsystems
   private final DriveSystem m_driveSystem;
-  private final ClawSystem m_clawSystem;
   private final ClawSpinSystem m_clawSpinSystem;
   private final ElevatorSystem m_elevatorSystem;
   private final LimelightSystem m_limelightSystem;
@@ -77,8 +75,6 @@ public class RobotContainer {
     //Subsystem Instantiations
     m_driveSystem = new DriveSystem();
     subsystems.add(m_driveSystem);
-    m_clawSystem = new ClawSystem();
-    subsystems.add(m_clawSystem);
     m_clawSpinSystem = new ClawSpinSystem();
     subsystems.add(m_clawSpinSystem);
     m_elevatorSystem = new ElevatorSystem();
