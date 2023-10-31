@@ -18,6 +18,9 @@ import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants;
 
+import com.kauailabs.navx.frc.AHRS;
+
+
 public class DriveSystem extends TankDriveSubsystem {
         // Master Controllers
         public final TalonFX masterLeft, masterRight;
