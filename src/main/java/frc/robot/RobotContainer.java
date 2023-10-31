@@ -122,7 +122,7 @@ public class RobotContainer {
   }
 
   public Double getElevatorControl() {
-    double y = DoubleUtils.normalize(stick2.getLeftY());
+    double y = DoubleUtils.normalize(stick2.getLeftY()) * 0.1;
     Vector2 control = new Vector2(0.0, y);
     control = JoystickHelper.ScaledAxialDeadzone(control, Constants.Config.Input.kInputDeadband);
     control = JoystickHelper.clampStick(control);
