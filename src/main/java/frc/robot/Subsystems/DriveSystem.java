@@ -78,8 +78,6 @@ public class DriveSystem extends MotoredSubsystem{
 
         @Override
         public Sendable log() {
-                Shuffleboard.getTab("Log").addDouble("Angle", () -> gyro.getYaw());
-                Shuffleboard.getTab("Log").addNumber("testing", () -> 1);
                 return this;
         }
 }
