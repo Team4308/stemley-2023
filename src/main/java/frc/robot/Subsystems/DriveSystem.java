@@ -34,11 +34,14 @@ public class DriveSystem extends MotoredSubsystem{
         // Gyro
         public static AHRS gyro = new AHRS();
 
+        public static DigitalInput minBreak;
+
         // Init
         public DriveSystem() {
                 // Setup and Add Controllers
                 masterLeft = new TalonSRX(Constants.Mapping.Drive.frontLeft);
                 controllersSRX.add(masterLeft);
+                minBreak = new DigitalInput(0);
                 
                 // Reset Config for all
                 for (TalonSRX talon : controllersSRX) {
@@ -76,8 +79,14 @@ public class DriveSystem extends MotoredSubsystem{
                 gyro.reset();
         }
 
+        public boolean getMinBreak(){
+                return minBreak.get();
+            }
+
         @Override
         public Sendable log() {
+                Shuffleboard.getTab("Log").addDouble("Angle", () -> gyro.getYaw());
+                Shuffleboard.getTab("Log").addBoolean("Elevator Retracted", () -> getMinBreak());
                 return this;
         }
 }
