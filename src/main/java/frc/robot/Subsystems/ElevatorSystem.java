@@ -83,7 +83,8 @@ public class ElevatorSystem extends MotoredSubsystem {
     }
 
     public boolean getMinBreak(){
-        return minBreak.get();
+        return false;
+        // return minBreak.get();
     }
 
     @Override
