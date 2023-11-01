@@ -12,7 +12,7 @@ public final class Constants {
         }
 
         public static class Elevator {
-            public static int elevatorMotor = 5;
+            public static int elevatorMotor = 4;
         }
 
         /*public static class Claw {
