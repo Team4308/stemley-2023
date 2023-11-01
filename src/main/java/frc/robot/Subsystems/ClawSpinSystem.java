@@ -11,14 +11,14 @@ import edu.wpi.first.util.sendable.Sendable;
 import frc.robot.Constants;
 
 public class ClawSpinSystem extends MotoredSubsystem {
-    //public final TalonSRX motor;
+    public final TalonSRX motor;
     private ArrayList<TalonSRX> controllersSRX = new ArrayList<TalonSRX>();
 
     public ClawSpinSystem() {
         // Setup and Add Controllers
 
         //change later
-        //motor = new TalonSRX(Constants.Mapping.ClawSpin.m);
+        motor = new TalonSRX(Constants.Mapping.Claw.clawMotor);
         controllersSRX.add(motor);
 
         // Reset Config for all
