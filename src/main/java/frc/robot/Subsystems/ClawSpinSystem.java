@@ -42,11 +42,11 @@ public class ClawSpinSystem extends MotoredSubsystem {
     }
 
     public void setClawSpinOutput(TalonSRXControlMode mode, double val) {
-        //motor.set(mode, val);
+        motor.set(mode, val);
     }
 
     public void stopControllers() {
-        //motor.set(TalonSRXControlMode.PercentOutput, 0.0);
+        motor.set(TalonSRXControlMode.PercentOutput, 0.0);
     }
 
     @Override

@@ -130,7 +130,7 @@ public class DriveSystem extends TankDriveSubsystem {
                                 Constants.Config.Drive.MotionMagic.Right.kD, Constants.Generic.timeoutMs);
                 masterRight.config_kF(Constants.Config.Drive.MotionMagic.profileSlot,
                                 Constants.Config.Drive.MotionMagic.Right.kF, Constants.Generic.timeoutMs);
-                masterRight.setNeutralMode(NeutralMode.Coast);
+                masterRight.setNeutralMode(NeutralMode.Brake);
                 masterRight.config_IntegralZone(Constants.Config.Drive.MotionMagic.profileSlot, 10);
 
                 // Reset

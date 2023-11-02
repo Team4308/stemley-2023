@@ -97,6 +97,7 @@ public class RobotContainer {
     basic = new Basic(m_driveSystem);
     dockOnly = new DockOnly(m_driveSystem);
 
+
     autoCommandChooser.addOption("basic", basic);
     autoCommandChooser.addOption("DockOnly", dockOnly);
 
@@ -135,11 +136,14 @@ public class RobotContainer {
 
   public Double getElevatorControl() {
     double y = DoubleUtils.normalize(stick2.getLeftY());
-    Vector2 control;
-    if(y < 0)control = new Vector2(0.0, y * 0.5);
-    else control = new Vector2(0.0, 0.15);
-    control = JoystickHelper.ScaledAxialDeadzone(control, Constants.Config.Input.kInputDeadband);
-    control = JoystickHelper.clampStick(control);
+    Vector2 control = new Vector2(0.0, y);
+    if(y>0){
+      control.y *= 0.15;
+    }else{
+      control.y *= 0.5;
+    }
+    // control = JoystickHelper.ScaledAxialDeadzone(control, Constants.Config.Input.kInputDeadband);
+    // normal
     return control.y;
   }
 
