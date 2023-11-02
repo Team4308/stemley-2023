@@ -40,6 +40,7 @@ import frc.robot.Commands.ElevatorCommand;
 import frc.robot.Commands.ClawSpinCommand;
 import frc.robot.Commands.DockingCommand;
 import frc.robot.Commands.LEDCommand;
+import frc.robot.Commands.HoldInPlace;
 
 import frc.robot.Commands.Auto.DriveDistance;
 import frc.robot.Commands.Auto.Groups.Basic;
@@ -109,6 +110,7 @@ public class RobotContainer {
     stick2.RB.whileTrue(new ClawSpinCommand(m_clawSpinSystem, -1));
     stick1.B.onTrue(new InstantCommand(() -> m_driveSystem.resetAngle(), m_driveSystem));
     stick1.A.onTrue(new InstantCommand(() -> m_limelightSystem.toggleCamera(), m_limelightSystem));
+    stick1.LB.whileTrue(new HoldInPlace(m_driveSystem, () -> getHoldControl()));
   }
 
   public Vector2 getDriveControl() {
@@ -145,6 +147,11 @@ public class RobotContainer {
     // control = JoystickHelper.ScaledAxialDeadzone(control, Constants.Config.Input.kInputDeadband);
     // normal
     return control.y;
+  }
+
+  public Vector2 getHoldControl(){
+    Vector2 control = new Vector2(m_driveSystem.masterLeft.getSelectedSensorPosition(), m_driveSystem.masterRight.getSelectedSensorPosition());
+    return control;
   }
 
   public Command getAutonomousCommand() {
