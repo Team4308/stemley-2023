@@ -41,6 +41,7 @@ import frc.robot.Commands.ClawSpinCommand;
 import frc.robot.Commands.DockingCommand;
 import frc.robot.Commands.LEDCommand;
 import frc.robot.Commands.HoldInPlace;
+import frc.robot.Commands.Auto.Groups.MobilityOnly;
 
 import frc.robot.Commands.Auto.DriveDistance;
 import frc.robot.Commands.Auto.Groups.MobilityOnly;
@@ -61,6 +62,7 @@ public class RobotContainer {
   private final ElevatorCommand elevatorCommand;
   private final ClawSpinCommand clawSpinCommand;
   private final LEDCommand ledCommand;
+  
 
   //Controllers
 
@@ -152,8 +154,8 @@ public class RobotContainer {
     double y;
     if(DoubleUtils.normalize(stick2.getRightY()) < 0.1 && DoubleUtils.normalize(stick2.getRightY()) > -0.1 && m_clawSpinSystem.state)y = -0.15;
     else y = DoubleUtils.normalize(stick2.getRightY()) * 0.5;
-    if(y > 0)m_clawSpinSystem.state = false;
-    if(y < 0)m_clawSpinSystem.state = true;
+    if(y > 0.3)m_clawSpinSystem.state = false;
+    if(y < -0.3)m_clawSpinSystem.state = true;
     Vector2 control = new Vector2(0.0, y);
     if(y > 0)control.y *= 0.5;
     return control.y;
@@ -169,7 +171,8 @@ public class RobotContainer {
   }
 
   public Command getAutonomousCommand() {
-    return autoCommandChooser.getSelected();
+    // return autoCommandChooser.getSelected();
+    return mobilityOnly;
   }
 
   public Integer getLEDCommand() {
