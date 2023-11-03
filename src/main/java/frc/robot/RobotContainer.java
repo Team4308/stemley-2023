@@ -59,6 +59,7 @@ public class RobotContainer {
   //Commands
   private final DriveCommand driveCommand;
   private final ElevatorCommand elevatorCommand;
+  private final ClawSpinCommand clawSpinCommand;
   private final LEDCommand ledCommand;
 
   //Controllers
@@ -94,10 +95,12 @@ public class RobotContainer {
 
     ledCommand = new LEDCommand(m_ledSystem, () -> getLEDCommand());
     m_ledSystem.setDefaultCommand(ledCommand);
+
+    clawSpinCommand = new ClawSpinCommand(m_clawSpinSystem, () -> getClawSpinCommand());
+    m_clawSpinSystem.setDefaultCommand(clawSpinCommand);
   
     basic = new Basic(m_driveSystem);
     dockOnly = new DockOnly(m_driveSystem);
-
 
     autoCommandChooser.addOption("basic", basic);
     autoCommandChooser.addOption("DockOnly", dockOnly);
@@ -106,8 +109,8 @@ public class RobotContainer {
   }
 
   private void configureBindings() {
-    stick2.LB.whileTrue(new ClawSpinCommand(m_clawSpinSystem, 1));
-    stick2.RB.whileTrue(new ClawSpinCommand(m_clawSpinSystem, -1));
+    //stick2.LB.whileTrue(new ClawSpinCommand(m_clawSpinSystem, 1));
+    //stick2.RB.whileTrue(new ClawSpinCommand(m_clawSpinSystem, -1));
     stick1.B.onTrue(new InstantCommand(() -> m_driveSystem.resetAngle(), m_driveSystem));
     stick1.A.onTrue(new InstantCommand(() -> m_limelightSystem.toggleCamera(), m_limelightSystem));
     stick1.LB.whileTrue(new HoldInPlace(m_driveSystem, () -> getHoldControl()));
@@ -115,17 +118,12 @@ public class RobotContainer {
 
   public Vector2 getDriveControl() {
     double throttle = DoubleUtils.normalize(stick1.getLeftY());
-    if(stick1.RB.getAsBoolean()){
-      //throttle /= 2;
-    }
 
     double turn = DoubleUtils.normalize(stick1.getRightX());
-    if(stick1.getLeftY()!=0.0){
-        //increase turn in here
-        //turn *= 1.4;
-    }
-    else{
-      //turn -= throttle*0.4;
+
+    if(stick1.RB.getAsBoolean()){
+      throttle /= 1.5;
+      turn /= 2;
     }
 
     Vector2 control = new Vector2(turn, throttle);
@@ -146,6 +144,12 @@ public class RobotContainer {
     }
     // control = JoystickHelper.ScaledAxialDeadzone(control, Constants.Config.Input.kInputDeadband);
     // normal
+    return control.y;
+  }
+
+  public Double getClawSpinCommand() {
+    double y = DoubleUtils.normalize(stick2.getRightY());
+    Vector2 control = new Vector2(0.0, y);
     return control.y;
   }
 
