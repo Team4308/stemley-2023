@@ -171,8 +171,8 @@ public class RobotContainer {
   }
 
   public Command getAutonomousCommand() {
-    // return autoCommandChooser.getSelected();
-    return mobilityOnly;
+    return autoCommandChooser.getSelected();
+    // return mobilityOnly;
   }
 
   public Integer getLEDCommand() {
