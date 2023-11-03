@@ -91,6 +91,7 @@ public class ElevatorSystem extends MotoredSubsystem {
     public Sendable log() {
         Shuffleboard.getTab("Log").addBoolean("Elevator Retracted", () -> getMinBreak());
         Shuffleboard.getTab("Log").addBoolean("Elevator Extended", () -> getMaxBreak());
+        Shuffleboard.getTab("Log").addNumber("Elevator Extension Pos", () -> getSensorPosition());
         return this;
     }
 }

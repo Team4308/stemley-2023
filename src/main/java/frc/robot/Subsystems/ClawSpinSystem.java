@@ -13,6 +13,7 @@ import frc.robot.Constants;
 public class ClawSpinSystem extends MotoredSubsystem {
     public final TalonSRX motor;
     private ArrayList<TalonSRX> controllersSRX = new ArrayList<TalonSRX>();
+    public boolean state;
 
     public ClawSpinSystem() {
         // Setup and Add Controllers

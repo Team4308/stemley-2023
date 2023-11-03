@@ -43,7 +43,7 @@ import frc.robot.Commands.LEDCommand;
 import frc.robot.Commands.HoldInPlace;
 
 import frc.robot.Commands.Auto.DriveDistance;
-import frc.robot.Commands.Auto.Groups.Basic;
+import frc.robot.Commands.Auto.Groups.MobilityOnly;
 import frc.robot.Commands.Auto.Groups.DockOnly;
 
 public class RobotContainer {
@@ -70,7 +70,7 @@ public class RobotContainer {
   //Auto
   private final SendableChooser<Command> autoCommandChooser = new SendableChooser<Command>();
 
-  private final Basic basic;
+  private final MobilityOnly mobilityOnly;
   private final DockOnly dockOnly;
 
   public RobotContainer() {
@@ -96,13 +96,13 @@ public class RobotContainer {
     ledCommand = new LEDCommand(m_ledSystem, () -> getLEDCommand());
     m_ledSystem.setDefaultCommand(ledCommand);
 
-    clawSpinCommand = new ClawSpinCommand(m_clawSpinSystem, () -> getClawSpinCommand());
+    clawSpinCommand = new ClawSpinCommand(m_clawSpinSystem, () -> getClawSpinControl());
     m_clawSpinSystem.setDefaultCommand(clawSpinCommand);
   
-    basic = new Basic(m_driveSystem);
+    mobilityOnly = new MobilityOnly(m_driveSystem);
     dockOnly = new DockOnly(m_driveSystem);
 
-    autoCommandChooser.addOption("basic", basic);
+    autoCommandChooser.addOption("MobilityOnly", mobilityOnly);
     autoCommandChooser.addOption("DockOnly", dockOnly);
 
     configureBindings();
@@ -114,6 +114,7 @@ public class RobotContainer {
     stick1.B.onTrue(new InstantCommand(() -> m_driveSystem.resetAngle(), m_driveSystem));
     stick1.A.onTrue(new InstantCommand(() -> m_limelightSystem.toggleCamera(), m_limelightSystem));
     stick1.LB.whileTrue(new HoldInPlace(m_driveSystem, () -> getHoldControl()));
+    stick2.RB.whileTrue(new ClawSpinCommand(m_clawSpinSystem, () -> getClawHoldControl()));
   }
 
   public Vector2 getDriveControl() {
@@ -147,15 +148,24 @@ public class RobotContainer {
     return control.y;
   }
 
-  public Double getClawSpinCommand() {
-    double y = DoubleUtils.normalize(stick2.getRightY());
+  public Double getClawSpinControl() {
+    double y;
+    if(DoubleUtils.normalize(stick2.getRightY()) < 0.1 && DoubleUtils.normalize(stick2.getRightY()) > -0.1 && m_clawSpinSystem.state)y = -0.15;
+    else y = DoubleUtils.normalize(stick2.getRightY()) * 0.5;
+    if(y > 0)m_clawSpinSystem.state = false;
+    if(y < 0)m_clawSpinSystem.state = true;
     Vector2 control = new Vector2(0.0, y);
+    if(y > 0)control.y *= 0.5;
     return control.y;
   }
 
   public Vector2 getHoldControl(){
     Vector2 control = new Vector2(m_driveSystem.masterLeft.getSelectedSensorPosition(), m_driveSystem.masterRight.getSelectedSensorPosition());
     return control;
+  }
+
+  public Double getClawHoldControl() {
+    return -0.15;
   }
 
   public Command getAutonomousCommand() {
