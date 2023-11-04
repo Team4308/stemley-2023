@@ -6,46 +6,27 @@ package frc.robot;
 
 import java.util.ArrayList;
 
-import com.ctre.phoenix.motorcontrol.NeutralMode;
-
 import ca.team4308.absolutelib.control.JoystickHelper;
 import ca.team4308.absolutelib.control.XBoxWrapper;
-import ca.team4308.absolutelib.math.Vector2;
 import ca.team4308.absolutelib.math.DoubleUtils;
+import ca.team4308.absolutelib.math.Vector2;
 import ca.team4308.absolutelib.wrapper.LogSubsystem;
-
-import frc.robot.Subsystems.DriveSystem;
-import frc.robot.Subsystems.ClawSpinSystem;
-import frc.robot.Subsystems.ElevatorSystem;
-import frc.robot.Subsystems.LimelightSystem;
-import frc.robot.Subsystems.LEDSystem;
-
-import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.Commands;
-import edu.wpi.first.wpilibj2.command.InstantCommand;
-import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
-import edu.wpi.first.wpilibj2.command.RepeatCommand;
-import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
-import edu.wpi.first.wpilibj2.command.button.Trigger;
-import edu.wpi.first.wpilibj.RobotController;
-import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
-import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
-// andrew dai was here :3
-
+import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
+import frc.robot.Commands.ClawSpinCommand;
 import frc.robot.Commands.DriveCommand;
 import frc.robot.Commands.ElevatorCommand;
-import frc.robot.Commands.ClawSpinCommand;
-import frc.robot.Commands.DockingCommand;
-import frc.robot.Commands.LEDCommand;
 import frc.robot.Commands.HoldInPlace;
-import frc.robot.Commands.Auto.Groups.MobilityOnly;
-
-import frc.robot.Commands.Auto.DriveDistance;
-import frc.robot.Commands.Auto.Groups.MobilityOnly;
+import frc.robot.Commands.LEDCommand;
 import frc.robot.Commands.Auto.Groups.DockOnly;
+import frc.robot.Commands.Auto.Groups.MobilityOnly;
+import frc.robot.Subsystems.ClawSpinSystem;
+import frc.robot.Subsystems.DriveSystem;
+import frc.robot.Subsystems.ElevatorSystem;
+import frc.robot.Subsystems.LEDSystem;
+import frc.robot.Subsystems.LimelightSystem;
 
 public class RobotContainer {
   public final ArrayList<LogSubsystem> subsystems = new ArrayList<LogSubsystem>();
@@ -106,6 +87,8 @@ public class RobotContainer {
 
     autoCommandChooser.addOption("MobilityOnly", mobilityOnly);
     autoCommandChooser.addOption("DockOnly", dockOnly);
+
+    SmartDashboard.putData(autoCommandChooser);
 
     configureBindings();
   }
