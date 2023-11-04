@@ -21,7 +21,9 @@ import frc.robot.Commands.ElevatorCommand;
 import frc.robot.Commands.HoldInPlace;
 import frc.robot.Commands.LEDCommand;
 import frc.robot.Commands.Auto.Groups.DockOnly;
+import frc.robot.Commands.Auto.Groups.HighOnly;
 import frc.robot.Commands.Auto.Groups.MobilityOnly;
+import frc.robot.Commands.Auto.Groups.PreloadMobHigh;
 import frc.robot.Subsystems.ClawSpinSystem;
 import frc.robot.Subsystems.DriveSystem;
 import frc.robot.Subsystems.ElevatorSystem;
@@ -55,6 +57,8 @@ public class RobotContainer {
 
   private final MobilityOnly mobilityOnly;
   private final DockOnly dockOnly;
+  private final PreloadMobHigh preloadMobHigh;
+  private final HighOnly highOnly;
 
   public RobotContainer() {
     //Subsystem Instantiations
@@ -84,9 +88,13 @@ public class RobotContainer {
   
     mobilityOnly = new MobilityOnly(m_driveSystem);
     dockOnly = new DockOnly(m_driveSystem);
+    preloadMobHigh = new PreloadMobHigh(m_driveSystem, m_elevatorSystem, m_clawSpinSystem);
+    highOnly = new HighOnly(m_elevatorSystem, m_clawSpinSystem);
 
     autoCommandChooser.addOption("MobilityOnly", mobilityOnly);
     autoCommandChooser.addOption("DockOnly", dockOnly);
+    autoCommandChooser.addOption("PreloadMobHigh", preloadMobHigh);
+    autoCommandChooser.addOption("HighOnly", highOnly);
 
     SmartDashboard.putData(autoCommandChooser);
 
@@ -155,7 +163,6 @@ public class RobotContainer {
 
   public Command getAutonomousCommand() {
     return autoCommandChooser.getSelected();
-    // return mobilityOnly;
   }
 
   public Integer getLEDCommand() {
