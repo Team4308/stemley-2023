@@ -1,7 +1,5 @@
 package frc.robot.Commands.Auto.Groups;
 
-import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
-import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Commands.Auto.DriveDistance;
 import frc.robot.Subsystems.DriveSystem;

@@ -4,11 +4,8 @@ import java.util.function.Supplier;
 
 import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
 
-import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
 import frc.robot.Subsystems.ElevatorSystem;
-import ca.team4308.absolutelib.math.DoubleUtils;
 
 public class ElevatorCommand extends CommandBase {
     private final ElevatorSystem m_subsystem;

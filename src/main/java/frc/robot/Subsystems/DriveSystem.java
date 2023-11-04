@@ -11,15 +11,9 @@ import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.kauailabs.navx.frc.AHRS;
 
 import ca.team4308.absolutelib.wrapper.drive.TankDriveSubsystem;
-import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.util.sendable.Sendable;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants;
-
-import com.kauailabs.navx.frc.AHRS;
-
 
 public class DriveSystem extends TankDriveSubsystem {
         // Master Controllers
@@ -32,7 +26,7 @@ public class DriveSystem extends TankDriveSubsystem {
         private ArrayList<TalonFX> controllersFX = new ArrayList<TalonFX>();
 
         // Gyro
-        public static AHRS gyro = new AHRS();
+        public final AHRS gyro = new AHRS();
 
         // Init
         public DriveSystem() {

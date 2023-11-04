@@ -1,15 +1,8 @@
 package frc.robot.Commands.Auto.Groups;
 
 import edu.wpi.first.wpilibj2.command.ParallelDeadlineGroup;
-import edu.wpi.first.wpilibj2.command.ParallelRaceGroup;
-import edu.wpi.first.wpilibj2.command.RepeatCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
-import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
-import edu.wpi.first.wpilibj2.command.InstantCommand;
-import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
-import frc.robot.Commands.ClawSpinCommand;
-import frc.robot.Commands.DockingCommand;
 import frc.robot.Commands.Auto.DriveDistance;
 import frc.robot.Commands.Auto.ElevatorExtend;
 import frc.robot.Commands.Auto.ClawSpin;

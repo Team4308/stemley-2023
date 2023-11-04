@@ -2,10 +2,7 @@ package frc.robot.Commands.Auto;
 
 import com.ctre.phoenix.motorcontrol.TalonSRXControlMode;
 
-import ca.team4308.absolutelib.math.DoubleUtils;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import edu.wpi.first.math.controller.PIDController;
-import frc.robot.Constants;
 import frc.robot.Subsystems.ClawSpinSystem;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
