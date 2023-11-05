@@ -10,8 +10,6 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
 
 import ca.team4308.absolutelib.wrapper.LogSubsystem;
-import edu.wpi.first.wpilibj.Compressor;
-import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 
 public class Robot extends TimedRobot {
@@ -26,10 +24,6 @@ public class Robot extends TimedRobot {
     for (LogSubsystem subsystem : m_robotContainer.subsystems) {
       Shuffleboard.getTab("Log").add(subsystem.log());
     }
-
-    // change the id as needed
-    Compressor compressor = new Compressor(8, PneumaticsModuleType.CTREPCM);
-    compressor.enableDigital();
   }
 
   @Override

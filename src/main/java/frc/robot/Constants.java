@@ -11,14 +11,12 @@ public final class Constants {
             public static int backRight = 3;
         }
 
-        public static class Arm {
-            public static int motor1 = 4;
-            public static int motor2 = 5;
+        public static class Elevator {
+            public static int elevatorMotor = 4;
         }
 
         public static class Claw {
-            public static int PCM = 8;
-
+            public static int clawMotor = 5;
         }
     }
 
@@ -32,30 +30,6 @@ public final class Constants {
 
             public static class Stick {
                 public static double kInputScale = 2.0;
-            }
-        }
-
-        public static class Arm {
-            public static class AngleControl {
-                public static double kP = 0.0002;
-                public static double kI = 0.0001;
-                public static double kD = 0.0;
-            }
-            public static class AutoAngleControl {
-                public static double kP = 0.0005;
-                public static double kI = 0.000;
-                public static double kD = 0.000;
-            }
-            public static class AutoAngleControlHold {
-                public static double kP = 0.0002;
-                public static double kI = 0.0001;
-                public static double kD = 0.0;
-            }
-
-            public static class ExtensionControl {
-                public static double kP = 0.00001;
-                public static double kI = 0.0;
-                public static double kD = 0.0;
             }
         }
 
@@ -75,35 +49,6 @@ public final class Constants {
 
                 public static StatorCurrentLimitConfiguration kStatorCurrentLimit = new StatorCurrentLimitConfiguration(
                         true, 50, 60, 100);
-            }
-
-            public static class AngleControl {
-                public static double kP = 0.005;
-                public static double kI = 0.0;
-                public static double kD = 0.0;
-                public static double kTolerance = 0.5;
-            }
-
-            public static class RangeControl {
-                public static double kP = 0.01;
-                public static double kI = 0.0;
-                public static double kD = 0.0;
-                public static double kTolerance = 1.0;
-            }
-
-            public static class PitchControl {
-                //p = 0.004, i = 0.0001, d = 0.0007
-                public static double kP = 0.0065;
-                public static double kI = 0.000;
-                public static double kD = 0.000;
-                public static double kTolerance = 2.0;
-            }
-
-            public static class HoldInPlace {
-                public static double kP = 0.00015;
-                public static double kI = 0.0;
-                public static double kD = 0.0;
-                public static double kTolerance = 100.0;
             }
 
             public static class VelocityControl {
@@ -143,6 +88,28 @@ public final class Constants {
                     public static double kD = 0.0;
                     public static double kF = 0.0468;
                 }
+            }
+
+            public static class HoldInPlace {
+                public static double kP = 0.00015;
+                public static double kI = 0.0;
+                public static double kD = 0.0;
+                public static double kTolerance = 100.0;
+            }
+
+            public static class PitchControl {
+                public static double kP = 0.01;
+                public static double kI = 0.000;
+                public static double kD = 0.000;
+                public static double kTolerance = 2.0;
+            }
+        }
+
+        public static class Elevator {
+            public static class ExtensionControl {
+                public static double kP = 0.005;
+                public static double kI = 0.0;
+                public static double kD = 0.0;
             }
         }
     }

@@ -8,37 +8,25 @@ import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
 import com.ctre.phoenix.motorcontrol.TalonFXFeedbackDevice;
 import com.ctre.phoenix.motorcontrol.TalonFXInvertType;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
+import com.kauailabs.navx.frc.AHRS;
 
 import ca.team4308.absolutelib.wrapper.drive.TankDriveSubsystem;
-import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.util.sendable.Sendable;
-import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.ADIS16470_IMU;
-import edu.wpi.first.wpilibj.ADIS16470_IMU.IMUAxis;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants;
 
 public class DriveSystem extends TankDriveSubsystem {
         // Master Controllers
         public final TalonFX masterLeft, masterRight;
+
         // Slave Controllers
         private final TalonFX slaveLeft, slaveRight;
 
-        //IMU
-        public static ADIS16470_IMU gyro = new ADIS16470_IMU();
-        // Beambreaks
-        public static DigitalInput lineBreak;
-        
-
-
-        public static Boolean brakeMode = false;
-
-
         // Controllers
         private ArrayList<TalonFX> controllersFX = new ArrayList<TalonFX>();
+
+        // Gyro
+        public final AHRS gyro = new AHRS();
 
         // Init
         public DriveSystem() {
@@ -126,7 +114,6 @@ public class DriveSystem extends TankDriveSubsystem {
                                 Constants.Config.Drive.MotionMagic.Right.kD, Constants.Generic.timeoutMs);
                 masterLeft.config_kF(Constants.Config.Drive.MotionMagic.profileSlot,
                                 Constants.Config.Drive.MotionMagic.Right.kF, Constants.Generic.timeoutMs);
-                masterLeft.setNeutralMode(NeutralMode.Coast);
                 masterLeft.config_IntegralZone(Constants.Config.Drive.MotionMagic.profileSlot, 10);
                 masterRight.config_kP(Constants.Config.Drive.MotionMagic.profileSlot,
                                 Constants.Config.Drive.MotionMagic.Right.kP, Constants.Generic.timeoutMs);
@@ -136,7 +123,6 @@ public class DriveSystem extends TankDriveSubsystem {
                                 Constants.Config.Drive.MotionMagic.Right.kD, Constants.Generic.timeoutMs);
                 masterRight.config_kF(Constants.Config.Drive.MotionMagic.profileSlot,
                                 Constants.Config.Drive.MotionMagic.Right.kF, Constants.Generic.timeoutMs);
-                masterRight.setNeutralMode(NeutralMode.Coast);
                 masterRight.config_IntegralZone(Constants.Config.Drive.MotionMagic.profileSlot, 10);
 
                 // Reset
@@ -193,6 +179,7 @@ public class DriveSystem extends TankDriveSubsystem {
 
         @Override
         public Sendable log() {
+                Shuffleboard.getTab("Log").addDouble("Angle", () -> gyro.getYaw());
                 return this;
         }
 }
