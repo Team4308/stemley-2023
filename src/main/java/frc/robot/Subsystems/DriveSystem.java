@@ -18,7 +18,7 @@ import frc.robot.Constants;
 public class DriveSystem extends TankDriveSubsystem {
         // Master Controllers
         public final TalonFX masterLeft, masterRight;
-
+        
         // Slave Controllers
         private final TalonFX slaveLeft, slaveRight;
 
@@ -27,6 +27,9 @@ public class DriveSystem extends TankDriveSubsystem {
 
         // Gyro
         public final AHRS gyro = new AHRS();
+
+        // Other Stuff
+        public double turnRate, throttleRate;
 
         // Init
         public DriveSystem() {
