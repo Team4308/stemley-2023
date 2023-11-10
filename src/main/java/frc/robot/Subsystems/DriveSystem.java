@@ -36,6 +36,8 @@ public class DriveSystem extends MotoredSubsystem{
 
         public static DigitalInput minBreak;
 
+        public double turnRate, throttleRate;
+
         // Init
         public DriveSystem() {
                 // Setup and Add Controllers

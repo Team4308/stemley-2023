@@ -5,7 +5,7 @@ import com.ctre.phoenix.motorcontrol.StatorCurrentLimitConfiguration;
 public final class Constants {
     public static class Mapping {
       public static class Drive {
-        public static int frontLeft = 4;
+        public static int frontLeft = 1;
     }
 
     }

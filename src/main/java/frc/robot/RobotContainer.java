@@ -63,20 +63,20 @@ public class RobotContainer {
   }
 
   public Vector2 getDriveControl() {
-    double throttle = DoubleUtils.normalize(stick.getLeftY());
-    if(stick.RB.getAsBoolean()){
-      //throttle /= 2;
-    }
-
     double turn = DoubleUtils.normalize(stick.getRightX());
-    if(stick.getLeftY()!=0.0){
-        //increase turn in here
-        //turn *= 1.4;
-    }
-    else{
-      //turn -= throttle*0.4;
+    double throttle = DoubleUtils.normalize(stick.getLeftY());
+
+    m_driveSystem.turnRate = turn;
+    m_driveSystem.throttleRate = throttle;
+
+    if(stick.RB.getAsBoolean()){
+      throttle /= 1.5;
+      turn /= 2;
     }
 
+    //if(turn - m_driveSystem.turnRate > 0.3)turn /= 2;
+    if(throttle - m_driveSystem.throttleRate > 0.3)throttle /= 2;
+    
     Vector2 control = new Vector2(turn, throttle);
     control = JoystickHelper.ScaledAxialDeadzone(control, Constants.Config.Input.kInputDeadband);
     control = JoystickHelper.scaleStick(control, Constants.Config.Input.Stick.kInputScale);
